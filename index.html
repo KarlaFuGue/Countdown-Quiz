@@ -2,34 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timed Coding Quiz</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="assets/css/style.css">
+    <title>Timed Coding Quiz</title>
+
+  
 </head>
+
 <body>
+    
     <div class="container">
         <div class="quiz_box">
             <div id="Quiz">
                 <h1>Coding Quiz Challenge</h1>
-                <header>
+                 <div class="quizheader">
                     <p id="progress">Question x</p>
                     <p id="timer">90</p>
                     <p id="scores"><a href="highscores.html">View Highscores</a></p>
-                </header>
-                <p id="question">What is your name?</p>
+                 </div>
+              
+                <p id="question">What is the answer of this question?</p>
                 <div class="buttons">
                     <button class="btn" id=btn0>
-                        A. <span id="choice0"></span>
+                        A. <span id="choice0">This is a choice</span>
                     </button>
                     <button class="btn" id=btn1>
-                        B. <span id="choice0"></span>
+                        B. <span id="choice1">This is a choice</span>
                     </button>
                     <button class="btn" id=btn2>
-                        C. <span id="choice0"></span>
+                        C. <span id="choice2">This is a choice</span>
                     </button>
                     <button class="btn" id=btn3>
-                        D. <span id="choice0"></span>
+                        D. <span id="choice3">This is a choice</span>
                     </button>
                 </div>  
                 <hr>
@@ -38,6 +43,8 @@
                 </footer>  
             </div>
         </div>
+     
     </div>
+<script src="script.js"></script>       
 </body>
 </html>

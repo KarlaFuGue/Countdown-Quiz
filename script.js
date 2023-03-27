@@ -24,52 +24,75 @@ class Quiz {
 
 //QUESTION CLASS
 class Question {
-    constructor(text, mc, answer){
+    constructor(text, choices, answer) {
         this.text = text;
-        this.mc = mc;
+        this.choices = choices;
         this.answer = answer;
     }
 //Is the selected choice correct?
-    isCorrectChoice(choice) {
+    isCorrectAnswer(choice) {
         return this.answer === choice;
     }
 }
 
 //DISPLAY QUESTION
 function displayQuestion() {
-    if(quiz.isFinished()){
+    if (quiz.isFinished()) {
         showScores();
-    }else {
+    } else {
         //display next question
         let questionElement =document.getElementById("question");
-        questionElement.innerHTM = quiz.getQuestionIndex().text;
+        questionElement.innerHTML = quiz.getQuestionIndex().text;
+
 
         //display multiple choices
         let choices = quiz.getQuestionIndex().choices;
         //Object which contet all the questions and options
-        for (let i =0; i < choices.lenght; i++) {
-            let choiceElement = document.getElementById("choice" + i);
+        for (let i = 0; i < choices.lenght; i++) {
+            let choiceElement = document.getElementsByClassName("btn");
             choiceElement.innerHTML = choices [i];
-            guess("btn" + i, mc [i]);
+            guess("btn" + i, choices [i]);
         }
         showProgress();
-
-
     }
 };
 
 //GUESS FUNCTION
 function guess(id, guess) {
     let button = document.getElementById(id);
-    button.onclick = function(){
+    button.onclick = function() {
         quiz.guess(guess);
         displayQuestion();
     }
-};
+}
+
 //PROGRESS
 function showProgress() {
     let currentQuestionNumber = quiz.questionIndex +1;
     let progressElement = document.getElementById("progress");
-    progressElement.innerHTML = 'Question ${currentQuestionNumber}';
+    progressElement = `Question ${currentQuestionNumber}`;
 }
+
+
+//QUIZ QUESTIONS
+let questions = [
+    new Question (
+     'Inside which HTML element do we put the JavaScript?',
+     ['<scripting>','<js>','<script>','<javascript>'],
+     '<script>',   
+    ),
+    new Question (
+    'Where is the correct place to insert a JavaScript?',
+    ['<body> section','<head> section','Both sections <head> & <body> are coreect'],
+    '<script>',   
+       ),
+
+];
+
+let quiz = new Quiz (questions);
+
+//DISPLAY QUESTION
+displayQuestion();
+
+
 
