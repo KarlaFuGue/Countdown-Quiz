@@ -11,17 +11,22 @@ class Quiz {
     }
 //Guess property: User selects a possible answer
     guess(answer) {
-        if (this.getQuestionIndex().isCorrectChoice(answer)){
-            this .score++;
+        console.log(this.getQuestionIndex().answer)
+        if (this.isCorrectAnswer(this.getQuestionIndex().answer)){
+            this.score++;
         }
         this.questionIndex++;
     }
+//Is the selected choice correct?
+    isCorrectAnswer(choice) {
+        return this.answer === choice;
+    }
+
 //Quiz has finished when all the questions were answered
     isFinished() {
         return this.questionIndex === this.questions.lenght;
     }
 }
-
 //QUESTION CLASS
 class Question {
     constructor(text, choices, answer) {
@@ -29,12 +34,7 @@ class Question {
         this.choices = choices;
         this.answer = answer;
     }
-//Is the selected choice correct?
-    isCorrectAnswer(choice) {
-        return this.answer === choice;
-    }
 }
-
 //DISPLAY QUESTION
 function displayQuestion() {
     if (quiz.isFinished()) {
@@ -47,10 +47,12 @@ function displayQuestion() {
 
         //display multiple choices
         let choices = quiz.getQuestionIndex().choices;
+        console.log(choices);
         //Object which contet all the questions and options
-        for (let i = 0; i < choices.lenght; i++) {
+        for (let i = 0; i < choices.length; i++) {
             let choiceElement = document.getElementsByClassName("btn");
-            choiceElement.innerHTML = choices [i];
+            console.log(choiceElement[i]);
+            choiceElement[i].textContent = choices[i];
             guess("btn" + i, choices [i]);
         }
         showProgress();
@@ -70,9 +72,8 @@ function guess(id, guess) {
 function showProgress() {
     let currentQuestionNumber = quiz.questionIndex +1;
     let progressElement = document.getElementById("progress");
-    progressElement = `Question ${currentQuestionNumber}`;
+    progressElement.textContent= `Question ${currentQuestionNumber}`;
 }
-
 
 //QUIZ QUESTIONS
 let questions = [
@@ -82,11 +83,25 @@ let questions = [
      '<script>',   
     ),
     new Question (
-    'Where is the correct place to insert a JavaScript?',
-    ['<body> section','<head> section','Both sections <head> & <body> are coreect'],
-    '<script>',   
-       ),
-
+    'How do you create a function in JavaScript?',
+    ['function:myFunction()','function myFunction()','function = myFunction()','function myFunction'],
+    'function myFunction()',   
+    ),
+    new Question (
+    'How can you add a comment in a JavaScript?',
+    ['Coment:This is a comment','<!--This is a comment-->','//This is a comment','*This is a comment'],
+    '//This is a comment',   
+    ),
+    new Question (
+    'Which event occurs when the user clicks on an HTML element?',
+    ['onmouseclick','onchange','onclick','onmouseover'],
+    'onclick',   
+    ),
+    new Question (
+    'What is the correct way to write a JavaScript array?', 
+    ['var colors = 1 = ("red), 2 =("green"), 3 = ("blue)','var colors = ["red", "green", "blue"]','var colors = "red", "green", "blue"','var colors = (1:"red",2:"green", 3:"blue")'],
+    'var colors = ["red", "green", "blue"]',   
+    ),
 ];
 
 let quiz = new Quiz (questions);
