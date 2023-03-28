@@ -74,6 +74,7 @@ function showProgress() {
     let progressElement = document.getElementById("progress");
     progressElement.textContent= `Question ${currentQuestionNumber}`;
 }
+//SCORE
 
 //QUIZ QUESTIONS
 let questions = [
